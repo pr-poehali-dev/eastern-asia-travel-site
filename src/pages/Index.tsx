@@ -60,6 +60,21 @@ const ROUTES = [
     cities: ["Токио", "Никко", "Хаконе", "Киото", "Нара", "Осака"],
     type: "Культура и природа",
     icon: "MapPin",
+    price: "от 180 000 ₽",
+    season: "Март–Май, Сентябрь–Ноябрь",
+    difficulty: "Лёгкий",
+    group: "до 12 человек",
+    accent: "from-rose-950/70",
+    description: "Самый полный маршрут по Японии — от шумного Токио до тихих садов Киото. Вы увидите всё: неоновые улицы Сибуи, водопады Никко, горячие источники у подножия Фудзи, золотые пагоды и оленей Нары.",
+    days: [
+      { day: "1–3", city: "Токио", desc: "Сибуя, Синдзюку, Асакуса, башня Скайтри, рыбный рынок Цукидзи" },
+      { day: "4", city: "Никко", desc: "Храмовый комплекс Тосёгу, водопады Кэгон, священный мост Синкё" },
+      { day: "5–6", city: "Хаконе", desc: "Онсэн (горячие источники), вид на Фудзи, открытый музей под небом" },
+      { day: "7–10", city: "Киото", desc: "Ворота Фусими Инари, Золотой павильон Кинкакудзи, Бамбуковая роща Арасияма, чайная церемония" },
+      { day: "11", city: "Нара", desc: "Олени парка, храм Тодайдзи с гигантским Буддой, фонари Касуга" },
+      { day: "12–14", city: "Осака", desc: "Замок Осака, квартал Дотонбори, уличная еда такояки и окономияки" },
+    ],
+    includes: ["Авиаперелёт", "Отели 4★", "Транспорт JR Pass", "Русскоязычный гид", "Завтраки"],
   },
   {
     title: "Золотой треугольник Китая",
@@ -67,6 +82,18 @@ const ROUTES = [
     cities: ["Пекин", "Сиань", "Шанхай"],
     type: "История и архитектура",
     icon: "Compass",
+    price: "от 155 000 ₽",
+    season: "Апрель–Май, Сентябрь–Октябрь",
+    difficulty: "Средний",
+    group: "до 15 человек",
+    accent: "from-amber-950/70",
+    description: "Три великих города — три эпохи Китая. Имперский Пекин с Запретным городом, древний Сиань с терракотовой армией и космополитичный Шанхай — самый современный мегаполис Азии.",
+    days: [
+      { day: "1–4", city: "Пекин", desc: "Запретный город, Великая стена (участок Мутяньюй), площадь Тяньаньмэнь, Храм Неба, Летний дворец" },
+      { day: "5–7", city: "Сиань", desc: "Терракотовая армия императора Цинь Шихуанди, Городская стена, Мечеть, Квартал Хуэйцзу" },
+      { day: "8–12", city: "Шанхай", desc: "Набережная Бунд, башня Пёрл Ориент, квартал Синьтяньди, сад Юйюань, Французская концессия" },
+    ],
+    includes: ["Авиаперелёт", "Отели 4★", "Скоростные поезда", "Русскоязычный гид", "Завтраки", "VPN-сим"],
   },
   {
     title: "Корея за 10 дней",
@@ -74,6 +101,19 @@ const ROUTES = [
     cities: ["Сеул", "Гьонджу", "Пусан", "Чеджу"],
     type: "Города и острова",
     icon: "Navigation",
+    price: "от 140 000 ₽",
+    season: "Апрель–Май, Октябрь–Ноябрь",
+    difficulty: "Лёгкий",
+    group: "до 12 человек",
+    accent: "from-blue-950/70",
+    description: "Компактный, но насыщенный маршрут по Южной Корее. Дворцы и K-pop в Сеуле, историческая столица Силла в Гьонджу, морепродукты Пусана и вулканические пейзажи острова Чеджу.",
+    days: [
+      { day: "1–4", city: "Сеул", desc: "Дворец Кёнбоккун, квартал Инсадон, Намсан и башня N Seoul, Каннам и Hongdae" },
+      { day: "5–6", city: "Гьонджу", desc: "Хранилище Чхомсондэ, королевские погребальные курганы, храм Пульгукса и грот Соккурам" },
+      { day: "7–8", city: "Пусан", desc: "Рыбный рынок Джагальчи, храм Хэдонг Ёнгунса на скалах, пляж Хэундэ" },
+      { day: "9–10", city: "Чеджу", desc: "Вулкан Халласан, водопады Чхончжиён, лавовые трубки Манджангуль" },
+    ],
+    includes: ["Авиаперелёт", "Отели 4★", "T-money карта", "Русскоязычный гид", "Завтраки"],
   },
   {
     title: "Большое азиатское путешествие",
@@ -81,6 +121,20 @@ const ROUTES = [
     cities: ["Токио", "Сеул", "Пекин", "Сиань", "Шанхай"],
     type: "Три страны",
     icon: "Globe",
+    price: "от 420 000 ₽",
+    season: "Апрель–Май",
+    difficulty: "Насыщенный",
+    group: "до 10 человек",
+    accent: "from-violet-950/70",
+    description: "Флагманский тур — всё лучшее из трёх стран в одном путешествии. Для тех, кто хочет погрузиться в Азию целиком: от японских садов до китайских небоскрёбов и корейских дворцов.",
+    days: [
+      { day: "1–7", city: "Токио → Киото", desc: "Токио, Никко, Хаконе, Киото, Нара, Осака — полная японская программа" },
+      { day: "8–10", city: "Сеул", desc: "Дворцы, кварталы Сеула, день-поездка в Гьонджу или Пусан" },
+      { day: "11–16", city: "Пекин", desc: "Великая стена, Запретный город, Летний дворец, Пекинская утка" },
+      { day: "17–20", city: "Сиань", desc: "Терракотовая армия, Великий шёлковый путь, ночной рынок" },
+      { day: "21–28", city: "Шанхай", desc: "Бунд, Юйюань, Сучжоу и Ханчжоу — день-поездки, прощальный ужин" },
+    ],
+    includes: ["Авиаперелёты (все)", "Отели 5★", "Все поезда", "Личный гид", "Полупансион", "Трансферы", "VPN-сим"],
   },
 ];
 
@@ -217,6 +271,7 @@ const Index = () => {
   const [activeCountry, setActiveCountry] = useState(0);
   const [carouselIdx, setCarouselIdx] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [selectedRoute, setSelectedRoute] = useState<typeof ROUTES[0] | null>(null);
 
   const scrollTo = (id: string) => {
     setActiveNav(id);
@@ -537,15 +592,24 @@ const Index = () => {
           {ROUTES.map((route, i) => (
             <div
               key={i}
-              className="card-hover border border-border bg-card p-8 cursor-pointer group"
+              onClick={() => setSelectedRoute(route)}
+              className="card-hover border border-border bg-card p-8 cursor-pointer group relative overflow-hidden"
             >
+              {/* Accent corner */}
+              <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl ${route.accent} to-transparent opacity-30 group-hover:opacity-60 transition-opacity`} />
+
               <div className="flex items-start justify-between mb-6">
                 <div className="w-10 h-10 border border-border flex items-center justify-center text-muted-foreground group-hover:border-[hsl(var(--accent))] group-hover:text-[hsl(var(--accent))] transition-colors">
                   <Icon name={route.icon} size={18} />
                 </div>
-                <span className="text-xs tracking-widest text-muted-foreground font-['Golos_Text'] uppercase">
-                  {route.duration}
-                </span>
+                <div className="text-right">
+                  <span className="block text-xs tracking-widest text-muted-foreground font-['Golos_Text'] uppercase mb-1">
+                    {route.duration}
+                  </span>
+                  <span className="block text-sm font-['Golos_Text'] text-[hsl(var(--accent))] font-medium">
+                    {route.price}
+                  </span>
+                </div>
               </div>
               <h3 className="font-['Cormorant_Garamond'] text-2xl font-light mb-2 text-foreground group-hover:text-[hsl(var(--accent))] transition-colors">
                 {route.title}
@@ -553,12 +617,16 @@ const Index = () => {
               <p className="text-xs text-muted-foreground tracking-wide mb-5 font-['Golos_Text']">
                 {route.type}
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {route.cities.map((city, ci) => (
                   <span key={ci} className="text-xs font-['Golos_Text'] text-foreground/70 bg-muted px-3 py-1">
                     {city}
                   </span>
                 ))}
+              </div>
+              <div className="flex items-center gap-2 text-xs font-['Golos_Text'] text-muted-foreground group-hover:text-[hsl(var(--accent))] transition-colors">
+                <span>Подробный маршрут</span>
+                <Icon name="ArrowRight" size={12} />
               </div>
             </div>
           ))}
@@ -759,6 +827,129 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* ROUTE DETAIL OVERLAY */}
+      {selectedRoute && (
+        <div
+          className="fixed inset-0 z-[100] flex items-stretch md:items-center justify-end"
+          onClick={() => setSelectedRoute(null)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-stone-950/70 backdrop-blur-sm" />
+
+          {/* Panel */}
+          <div
+            className="relative z-10 w-full md:w-[600px] h-full md:h-auto md:max-h-[90vh] bg-background overflow-y-auto shadow-2xl flex flex-col animate-slide-in-right"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header with gradient */}
+            <div className={`relative bg-gradient-to-br ${selectedRoute.accent} to-stone-900 p-8 pb-10`}>
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-20"
+                style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+              />
+              <button
+                onClick={() => setSelectedRoute(null)}
+                className="relative z-10 mb-6 flex items-center gap-2 text-white/60 hover:text-white transition-colors text-xs font-['Golos_Text'] tracking-widest uppercase"
+              >
+                <Icon name="ArrowLeft" size={13} />
+                Все маршруты
+              </button>
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-xs tracking-[0.25em] uppercase text-white/50 font-['Golos_Text']">{selectedRoute.type}</span>
+                  <span className="w-1 h-1 rounded-full bg-white/30" />
+                  <span className="text-xs tracking-[0.25em] uppercase text-white/50 font-['Golos_Text']">{selectedRoute.difficulty}</span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-2">
+                  {selectedRoute.title}
+                </h2>
+                <p className="text-white/60 font-['Golos_Text'] font-light text-sm mb-5">
+                  {selectedRoute.description}
+                </p>
+                {/* Key stats */}
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { icon: "Clock", label: "Длительность", val: selectedRoute.duration },
+                    { icon: "Users", label: "Группа", val: selectedRoute.group },
+                    { icon: "Sun", label: "Сезон", val: selectedRoute.season },
+                  ].map(stat => (
+                    <div key={stat.label} className="bg-white/10 backdrop-blur px-3 py-3 rounded-sm">
+                      <Icon name={stat.icon} size={13} className="text-white/50 mb-1" />
+                      <p className="text-white/50 text-[9px] tracking-widest uppercase font-['Golos_Text'] mb-0.5">{stat.label}</p>
+                      <p className="text-white text-xs font-['Golos_Text']">{stat.val}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Body */}
+            <div className="flex-1 p-8">
+              {/* Day-by-day */}
+              <div className="mb-8">
+                <p className="text-xs tracking-[0.2em] uppercase text-foreground/40 font-['Golos_Text'] mb-5">
+                  Программа по дням
+                </p>
+                <div className="space-y-0">
+                  {selectedRoute.days.map((d, i) => (
+                    <div key={i} className="flex gap-5 group">
+                      {/* Timeline */}
+                      <div className="flex flex-col items-center">
+                        <div className="w-7 h-7 flex-shrink-0 border border-border bg-card flex items-center justify-center text-[10px] font-['Golos_Text'] text-muted-foreground group-hover:border-[hsl(var(--accent))] group-hover:text-[hsl(var(--accent))] transition-colors">
+                          {i + 1}
+                        </div>
+                        {i < selectedRoute.days.length - 1 && (
+                          <div className="w-px flex-1 min-h-[20px] bg-border mt-1 mb-1" />
+                        )}
+                      </div>
+                      <div className="pb-5">
+                        <div className="flex items-center gap-3 mb-1">
+                          <span className="font-['Cormorant_Garamond'] text-lg font-light text-foreground">{d.city}</span>
+                          <span className="text-[10px] tracking-widest text-muted-foreground font-['Golos_Text'] uppercase">День {d.day}</span>
+                        </div>
+                        <p className="text-sm font-['Golos_Text'] font-light text-muted-foreground leading-relaxed">{d.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Included */}
+              <div className="mb-8">
+                <p className="text-xs tracking-[0.2em] uppercase text-foreground/40 font-['Golos_Text'] mb-4">
+                  Включено в тур
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedRoute.includes.map((inc, i) => (
+                    <span key={i} className="flex items-center gap-1.5 text-xs font-['Golos_Text'] text-foreground/80 bg-muted px-3 py-1.5">
+                      <Icon name="Check" size={10} className="text-[hsl(var(--accent))]" />
+                      {inc}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="border-t border-border pt-7 flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-muted-foreground font-['Golos_Text'] mb-1">Стоимость тура</p>
+                  <p className="font-['Cormorant_Garamond'] text-3xl font-light text-foreground">
+                    {selectedRoute.price}
+                  </p>
+                </div>
+                <button
+                  onClick={() => { setSelectedRoute(null); scrollTo("contacts"); }}
+                  className="inline-flex items-center gap-3 bg-foreground text-background px-7 py-3 text-sm tracking-widest uppercase font-['Golos_Text'] hover:bg-foreground/90 transition-all"
+                >
+                  Забронировать
+                  <Icon name="ArrowRight" size={13} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

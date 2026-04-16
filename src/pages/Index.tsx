@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Icon from "@/components/ui/icon";
 
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/b8898732-c7ef-43bd-8dd1-93e7e2e80d2b/files/918a570b-f2b6-4ef8-bbd4-ef0be703405e.jpg";
@@ -126,6 +126,81 @@ const GALLERY = [
   { src: HERO_IMAGE, title: "Ночной Сеул", country: "Южная Корея" },
 ];
 
+const CAROUSEL_ITEMS = [
+  {
+    id: "kyoto",
+    title: "Врата Фусими Инари",
+    subtitle: "Киото, Япония",
+    tag: "Культовое место",
+    desc: "Тысячи алых ворот тории, уходящих в гору — самый узнаваемый символ Японии",
+    target: "countries",
+    countryIndex: 1,
+    gradient: "from-rose-950/80 via-orange-900/40 to-transparent",
+    accent: "#e8a87c",
+    pattern: "radial-gradient(ellipse at 20% 50%, rgba(220,80,60,0.4) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(180,60,40,0.3) 0%, transparent 50%)",
+  },
+  {
+    id: "wall",
+    title: "Великая стена",
+    subtitle: "Пекин, Китай",
+    tag: "7 чудес света",
+    desc: "Более 21 тысячи километров — крупнейшее архитектурное сооружение в истории человечества",
+    target: "countries",
+    countryIndex: 0,
+    gradient: "from-stone-950/80 via-amber-900/30 to-transparent",
+    accent: "#d4a85a",
+    pattern: "radial-gradient(ellipse at 70% 30%, rgba(180,140,60,0.4) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(100,80,40,0.3) 0%, transparent 50%)",
+  },
+  {
+    id: "seoul",
+    title: "Дворец Кёнбоккун",
+    subtitle: "Сеул, Южная Корея",
+    tag: "Главная резиденция",
+    desc: "Грандиозный дворцовый комплекс XIV века с видом на небоскрёбы современного Сеула",
+    target: "countries",
+    countryIndex: 2,
+    gradient: "from-blue-950/80 via-indigo-900/30 to-transparent",
+    accent: "#8ab4d4",
+    pattern: "radial-gradient(ellipse at 30% 60%, rgba(60,80,180,0.4) 0%, transparent 60%), radial-gradient(ellipse at 80% 10%, rgba(40,60,140,0.3) 0%, transparent 50%)",
+  },
+  {
+    id: "fuji",
+    title: "Гора Фудзи",
+    subtitle: "Хонсю, Япония",
+    tag: "Природное чудо",
+    desc: "Священная вершина Японии — самая высокая точка страны и символ национальной идентичности",
+    target: "routes",
+    countryIndex: 1,
+    gradient: "from-slate-950/80 via-cyan-900/20 to-transparent",
+    accent: "#a8c4d4",
+    pattern: "radial-gradient(ellipse at 50% 80%, rgba(40,100,160,0.4) 0%, transparent 60%), radial-gradient(ellipse at 90% 20%, rgba(20,60,100,0.3) 0%, transparent 50%)",
+  },
+  {
+    id: "shanghai",
+    title: "Набережная Бунд",
+    subtitle: "Шанхай, Китай",
+    tag: "Ночная жизнь",
+    desc: "Контраст колониальной архитектуры и футуристических небоскрёбов — лицо современного Китая",
+    target: "routes",
+    countryIndex: 0,
+    gradient: "from-zinc-950/80 via-emerald-900/20 to-transparent",
+    accent: "#7dd4b0",
+    pattern: "radial-gradient(ellipse at 40% 40%, rgba(20,120,80,0.4) 0%, transparent 60%), radial-gradient(ellipse at 80% 70%, rgba(10,80,60,0.3) 0%, transparent 50%)",
+  },
+  {
+    id: "nara",
+    title: "Парк Нара",
+    subtitle: "Нара, Япония",
+    tag: "Природа и история",
+    desc: "Вольные олени среди пятиярусных пагод — здесь время замедляется и растворяется в тишине",
+    target: "gallery",
+    countryIndex: 1,
+    gradient: "from-green-950/80 via-teal-900/30 to-transparent",
+    accent: "#a8d4a0",
+    pattern: "radial-gradient(ellipse at 60% 30%, rgba(40,120,60,0.4) 0%, transparent 60%), radial-gradient(ellipse at 20% 70%, rgba(20,80,40,0.3) 0%, transparent 50%)",
+  },
+];
+
 const NAV_ITEMS = [
   { id: "home", label: "Главная" },
   { id: "countries", label: "Страны" },
@@ -140,12 +215,40 @@ const Index = () => {
   const [activeNav, setActiveNav] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCountry, setActiveCountry] = useState(0);
+  const [carouselIdx, setCarouselIdx] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const scrollTo = (id: string) => {
     setActiveNav(id);
     setMenuOpen(false);
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const goToSlide = useCallback((idx: number) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCarouselIdx(idx);
+      setIsTransitioning(false);
+    }, 300);
+  }, [isTransitioning]);
+
+  const prevSlide = () => goToSlide((carouselIdx - 1 + CAROUSEL_ITEMS.length) % CAROUSEL_ITEMS.length);
+  const nextSlide = () => goToSlide((carouselIdx + 1) % CAROUSEL_ITEMS.length);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCarouselIdx(prev => (prev + 1) % CAROUSEL_ITEMS.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleCarouselClick = (item: typeof CAROUSEL_ITEMS[0]) => {
+    if (item.target === "countries") {
+      setActiveCountry(item.countryIndex);
+    }
+    scrollTo(item.target);
   };
 
   return (
@@ -199,37 +302,150 @@ const Index = () => {
         )}
       </nav>
 
-      {/* HERO */}
-      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${HERO_IMAGE})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/50 via-stone-900/30 to-stone-900/70" />
-        <div className="absolute inset-0 wave-bg opacity-20" />
+      {/* HERO + CAROUSEL */}
+      <section id="home" className="relative h-screen flex flex-col overflow-hidden">
+        {/* Background slides */}
+        {CAROUSEL_ITEMS.map((item, i) => (
+          <div
+            key={item.id}
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{ opacity: i === carouselIdx ? 1 : 0 }}
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: item.pattern }}
+            />
+            <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient}`} />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-stone-950/20" />
+          </div>
+        ))}
 
-        <div className="relative z-10 text-center px-6 animate-fade-in-up">
-          <p className="text-amber-200/80 text-sm tracking-[0.3em] uppercase mb-6 font-['Golos_Text'] font-light animate-fade-in-up-delay-1">
+        <div className="absolute inset-0 wave-bg opacity-10" />
+
+        {/* Top title — static */}
+        <div className="relative z-10 text-center pt-28 pb-6 animate-fade-in-up">
+          <p className="text-amber-200/60 text-xs tracking-[0.35em] uppercase font-['Golos_Text'] font-light">
             Китай · Япония · Южная Корея
           </p>
-          <h1 className="text-white font-['Cormorant_Garamond'] text-6xl md:text-8xl font-light leading-tight mb-6">
-            Откройте<br />
-            <em className="italic font-light">Восточную Азию</em>
-          </h1>
-          <p className="text-stone-200/80 text-lg md:text-xl font-['Golos_Text'] font-light max-w-xl mx-auto mb-10 animate-fade-in-up-delay-2">
-            Маршруты, советы и вдохновение для незабываемых путешествий
-          </p>
-          <button
-            onClick={() => scrollTo("countries")}
-            className="animate-fade-in-up-delay-3 inline-flex items-center gap-3 bg-white/10 backdrop-blur border border-white/30 text-white px-8 py-3 text-sm tracking-widest uppercase font-['Golos_Text'] hover:bg-white/20 transition-all duration-300"
-          >
-            Начать путешествие
-            <Icon name="ArrowRight" size={14} />
-          </button>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-bounce">
-          <Icon name="ChevronsDown" size={20} className="text-white/50" />
+        {/* Carousel content */}
+        <div className="relative z-10 flex-1 flex items-end pb-32 px-6 md:px-16">
+          <div className="max-w-6xl mx-auto w-full">
+            {/* Active slide text */}
+            <div
+              className="mb-8 transition-all duration-500"
+              style={{ opacity: isTransitioning ? 0 : 1, transform: isTransitioning ? "translateY(12px)" : "translateY(0)" }}
+            >
+              <div
+                className="inline-block text-xs tracking-[0.25em] uppercase px-3 py-1 mb-4 font-['Golos_Text'] border"
+                style={{
+                  color: CAROUSEL_ITEMS[carouselIdx].accent,
+                  borderColor: `${CAROUSEL_ITEMS[carouselIdx].accent}40`,
+                  background: `${CAROUSEL_ITEMS[carouselIdx].accent}15`,
+                }}
+              >
+                {CAROUSEL_ITEMS[carouselIdx].tag}
+              </div>
+              <h1 className="text-white font-['Cormorant_Garamond'] text-5xl md:text-7xl font-light leading-tight mb-3">
+                {CAROUSEL_ITEMS[carouselIdx].title}
+              </h1>
+              <p className="text-white/50 font-['Golos_Text'] text-sm tracking-widest mb-3 uppercase">
+                {CAROUSEL_ITEMS[carouselIdx].subtitle}
+              </p>
+              <p className="text-white/70 font-['Golos_Text'] font-light text-base max-w-lg leading-relaxed mb-6">
+                {CAROUSEL_ITEMS[carouselIdx].desc}
+              </p>
+              <button
+                onClick={() => handleCarouselClick(CAROUSEL_ITEMS[carouselIdx])}
+                className="inline-flex items-center gap-3 border border-white/30 text-white px-7 py-2.5 text-sm tracking-widest uppercase font-['Golos_Text'] hover:bg-white/15 transition-all duration-300 group"
+                style={{ borderColor: `${CAROUSEL_ITEMS[carouselIdx].accent}60` }}
+              >
+                Подробнее
+                <Icon name="ArrowRight" size={13} />
+              </button>
+            </div>
+
+            {/* Thumbnail strip */}
+            <div className="flex gap-3 items-end">
+              {CAROUSEL_ITEMS.map((item, i) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    goToSlide(i);
+                  }}
+                  className="group relative flex-shrink-0 overflow-hidden border transition-all duration-400"
+                  style={{
+                    width: i === carouselIdx ? 120 : 60,
+                    height: i === carouselIdx ? 70 : 50,
+                    borderColor: i === carouselIdx ? `${item.accent}80` : "rgba(255,255,255,0.15)",
+                    transition: "width 0.4s ease, height 0.4s ease, border-color 0.3s ease",
+                  }}
+                >
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: item.pattern, opacity: 0.8 }}
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-b ${item.gradient} opacity-70`} />
+                  {i === carouselIdx && (
+                    <div className="absolute inset-0 flex items-end p-2">
+                      <span className="text-white text-[9px] font-['Golos_Text'] tracking-wide leading-tight line-clamp-2">
+                        {item.title}
+                      </span>
+                    </div>
+                  )}
+                </button>
+              ))}
+
+              {/* Arrows */}
+              <div className="flex gap-2 ml-auto">
+                <button
+                  onClick={prevSlide}
+                  className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/50 transition-all"
+                >
+                  <Icon name="ChevronLeft" size={16} />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/50 transition-all"
+                >
+                  <Icon name="ChevronRight" size={16} />
+                </button>
+              </div>
+            </div>
+
+            {/* Progress dots */}
+            <div className="flex gap-2 mt-4">
+              {CAROUSEL_ITEMS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goToSlide(i)}
+                  className="transition-all duration-400 rounded-full"
+                  style={{
+                    width: i === carouselIdx ? 24 : 6,
+                    height: 3,
+                    background: i === carouselIdx
+                      ? CAROUSEL_ITEMS[carouselIdx].accent
+                      : "rgba(255,255,255,0.25)",
+                    transition: "width 0.4s ease, background 0.3s ease",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-6 right-8 scroll-bounce">
+          <Icon name="ChevronsDown" size={18} className="text-white/30" />
         </div>
       </section>
 

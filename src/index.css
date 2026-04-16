@@ -192,6 +192,13 @@ html {
   opacity: 1;
 }
 
+/* Carousel thumbnail transition */
+.carousel-thumb {
+  transition:
+    width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Scroll indicator */
 @keyframes bounce {
   0%,

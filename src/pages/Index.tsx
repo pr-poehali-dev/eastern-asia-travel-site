@@ -180,6 +180,69 @@ const GALLERY = [
   { src: HERO_IMAGE, title: "Ночной Сеул", country: "Южная Корея" },
 ];
 
+const REVIEWS = [
+  {
+    name: "Анна Соколова",
+    city: "Москва",
+    tour: "Классическая Япония",
+    avatar: "АС",
+    rating: 5,
+    text: "Две недели в Японии — это был лучший опыт в моей жизни. Маршрут выверен идеально: ни одного лишнего часа. Киото в момент цветения сакуры — это просто нереально красиво. Гид Алексей знал всё о каждом камне.",
+    photo: HERO_IMAGE,
+    photoCaption: "Бамбуковая роща Арасияма, Киото",
+    date: "Апрель 2024",
+    gradient: "from-rose-900/70 via-rose-800/30",
+  },
+  {
+    name: "Михаил Дроздов",
+    city: "Санкт-Петербург",
+    tour: "Золотой треугольник Китая",
+    avatar: "МД",
+    rating: 5,
+    text: "Китай превзошёл все ожидания. Стоять на Великой стене на рассвете — это невозможно забыть. Терракотовая армия в Сиане просто поражает масштабом. Организация была на высшем уровне, VPN-симки раздали прямо в аэропорту.",
+    photo: HERO_IMAGE,
+    photoCaption: "Участок Мутяньюй, Великая стена",
+    date: "Октябрь 2024",
+    gradient: "from-amber-900/70 via-amber-800/30",
+  },
+  {
+    name: "Екатерина Лим",
+    city: "Екатеринбург",
+    tour: "Корея за 10 дней",
+    avatar: "ЕЛ",
+    rating: 5,
+    text: "Я была влюблена в K-pop, но Корея покорила меня совсем другим — едой, людьми, архитектурой. Храм Хэдонг на скалах над океаном — это фантастика. Чеджу вообще отдельная планета. Вернусь обязательно!",
+    photo: HERO_IMAGE,
+    photoCaption: "Храм Хэдонг Ёнгунса, Пусан",
+    date: "Май 2024",
+    gradient: "from-blue-900/70 via-blue-800/30",
+  },
+  {
+    name: "Сергей и Ольга Петровы",
+    city: "Новосибирск",
+    tour: "Большое азиатское путешествие",
+    avatar: "СП",
+    rating: 5,
+    text: "Взяли месяц отпуска и ни разу не пожалели. 28 дней пролетели как один. Три абсолютно разные страны, три разных мира — и везде было ощущение, что мы попали именно туда, куда надо. Это путешествие изменило нас.",
+    photo: HERO_IMAGE,
+    photoCaption: "Набережная Бунд, Шанхай",
+    date: "Апрель–Май 2024",
+    gradient: "from-violet-900/70 via-violet-800/30",
+  },
+  {
+    name: "Дарья Чернова",
+    city: "Казань",
+    tour: "Классическая Япония",
+    avatar: "ДЧ",
+    rating: 5,
+    text: "Ехала одна и немного боялась, но группа стала как семья. Нара с оленями — это что-то за гранью реальности, они буквально ходят за тобой. Онсэн в Хаконе с видом на Фудзи — пиковые впечатления всей поездки.",
+    photo: HERO_IMAGE,
+    photoCaption: "Парк Нара с оленями",
+    date: "Ноябрь 2024",
+    gradient: "from-teal-900/70 via-teal-800/30",
+  },
+];
+
 const CAROUSEL_ITEMS = [
   {
     id: "kyoto",
@@ -272,6 +335,7 @@ const Index = () => {
   const [carouselIdx, setCarouselIdx] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [selectedRoute, setSelectedRoute] = useState<typeof ROUTES[0] | null>(null);
+  const [reviewIdx, setReviewIdx] = useState(0);
 
   const scrollTo = (id: string) => {
     setActiveNav(id);
@@ -774,6 +838,139 @@ const Index = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* REVIEWS */}
+      <section className="py-24 px-6 bg-card overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-[hsl(var(--accent))] text-xs tracking-[0.3em] uppercase mb-4 font-['Golos_Text']">
+              <span className="deco-line" />Отзывы
+            </p>
+            <h2 className="font-['Cormorant_Garamond'] text-5xl font-light text-foreground">
+              Истории наших путешественников
+            </h2>
+          </div>
+
+          {/* Slider */}
+          <div className="relative">
+            {REVIEWS.map((review, i) => (
+              <div
+                key={i}
+                className="transition-all duration-500"
+                style={{ display: i === reviewIdx ? "block" : "none" }}
+              >
+                <div className="grid md:grid-cols-2 gap-0 border border-border overflow-hidden">
+                  {/* Photo side */}
+                  <div className="relative min-h-[320px] md:min-h-[480px] overflow-hidden">
+                    <img
+                      src={review.photo}
+                      alt={review.photoCaption}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${review.gradient} to-transparent`} />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-stone-950/20" />
+                    {/* Photo caption */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <p className="text-white/50 text-[10px] tracking-widest uppercase font-['Golos_Text'] mb-1">
+                        <Icon name="Camera" size={10} className="inline mr-1.5" />
+                        {review.photoCaption}
+                      </p>
+                    </div>
+                    {/* Counter */}
+                    <div className="absolute top-5 right-5 bg-stone-950/60 backdrop-blur px-3 py-1.5">
+                      <span className="text-white/60 text-xs font-['Golos_Text'] tabular-nums">
+                        {String(i + 1).padStart(2, "0")} / {String(REVIEWS.length).padStart(2, "0")}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Text side */}
+                  <div className="flex flex-col justify-between p-8 md:p-12 bg-background">
+                    {/* Stars */}
+                    <div>
+                      <div className="flex gap-1 mb-6">
+                        {Array.from({ length: review.rating }).map((_, si) => (
+                          <Icon key={si} name="Star" size={14} className="text-amber-400 fill-amber-400" />
+                        ))}
+                      </div>
+
+                      {/* Quote */}
+                      <div className="font-['Cormorant_Garamond'] text-4xl text-[hsl(var(--accent))]/30 leading-none mb-2 select-none">
+                        "
+                      </div>
+                      <p className="font-['Golos_Text'] font-light text-foreground/80 text-base leading-relaxed mb-8">
+                        {review.text}
+                      </p>
+                    </div>
+
+                    {/* Tour badge */}
+                    <div>
+                      <div className="inline-flex items-center gap-2 bg-muted px-3 py-1.5 mb-6">
+                        <Icon name="MapPin" size={11} className="text-muted-foreground" />
+                        <span className="text-xs font-['Golos_Text'] text-muted-foreground tracking-wide">
+                          {review.tour}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        {/* Author */}
+                        <div className="flex items-center gap-4">
+                          <div className="w-11 h-11 bg-foreground flex items-center justify-center flex-shrink-0">
+                            <span className="text-background text-xs font-['Golos_Text'] font-medium tracking-wide">
+                              {review.avatar}
+                            </span>
+                          </div>
+                          <div>
+                            <p className="font-['Golos_Text'] text-sm font-medium text-foreground">
+                              {review.name}
+                            </p>
+                            <p className="font-['Golos_Text'] text-xs text-muted-foreground">
+                              {review.city} · {review.date}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Nav arrows */}
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => setReviewIdx((reviewIdx - 1 + REVIEWS.length) % REVIEWS.length)}
+                            className="w-10 h-10 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-all"
+                          >
+                            <Icon name="ChevronLeft" size={16} />
+                          </button>
+                          <button
+                            onClick={() => setReviewIdx((reviewIdx + 1) % REVIEWS.length)}
+                            className="w-10 h-10 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-all"
+                          >
+                            <Icon name="ChevronRight" size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dot navigation */}
+          <div className="flex justify-center gap-2 mt-8">
+            {REVIEWS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setReviewIdx(i)}
+                className="transition-all duration-300 rounded-full"
+                style={{
+                  width: i === reviewIdx ? 24 : 6,
+                  height: 6,
+                  background: i === reviewIdx ? "hsl(var(--accent))" : "hsl(var(--border))",
+                  transition: "width 0.3s ease, background 0.3s ease",
+                }}
+              />
+            ))}
+          </div>
         </div>
       </section>
 

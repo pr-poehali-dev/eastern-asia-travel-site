@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/b8898732-c7ef-43bd-8dd1-93e7e2e80d2b/files/918a570b-f2b6-4ef8-bbd4-ef0be703405e.jpg";
@@ -329,6 +330,7 @@ const NAV_ITEMS = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCountry, setActiveCountry] = useState(0);
@@ -396,6 +398,12 @@ const Index = () => {
                 {item.label}
               </button>
             ))}
+            <button
+              onClick={() => navigate("/blog")}
+              className="text-sm tracking-wide font-light text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
+            >
+              Блог
+            </button>
           </div>
 
           <button
@@ -417,6 +425,12 @@ const Index = () => {
                 {item.label}
               </button>
             ))}
+            <button
+              onClick={() => navigate("/blog")}
+              className="text-left text-sm tracking-wide font-light text-muted-foreground hover:text-foreground transition-colors py-1"
+            >
+              Блог
+            </button>
           </div>
         )}
       </nav>
